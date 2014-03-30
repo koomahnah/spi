@@ -39,6 +39,7 @@ static inline void spiClearFIFO(void);
 static inline unsigned char spiDataIO(unsigned char);
 static inline void spiDataSend(unsigned char);
 static inline unsigned char spiDataReceive(void);
+static inline void spiSetClock(unsigned int);
 
 static inline void spiStartTransfer(void){
         unsigned int tmp = *spiControl;
@@ -77,4 +78,7 @@ static inline unsigned char spiDataReceive(void){
 	return (unsigned char)(*spiFIFO);
 }
 
+static inline void spiSetClock(unsigned int clock){
+	*spiClock = clock;
+}
 

@@ -32,6 +32,7 @@ extern volatile unsigned int* spiControl;
 extern volatile unsigned int* spiFIFO;
 extern volatile unsigned int* spiClock;
 
+void spiInit(int, int, int);
 static inline void spiStartTransfer(void);
 static inline void spiWaitTilDone(void);
 static inline void spiStopTransfer(void);

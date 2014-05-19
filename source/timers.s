@@ -1,4 +1,5 @@
 .text
+
 .globl getTimerAddr
 getTimerAddr:
 	ldr r0, =0x20003000
@@ -9,7 +10,7 @@ waitCycles:		@ waits given number of cycles - r0
 	subhi r0, r0, $1
 	bhi waitCycles
 	mov pc, lr
-.globl wait	@ takes interval (word value) in r0
+.globl wait	@ takes /*pointer to*/ interval (word value) in r0
 /*	what is it doing? actually, it just adds interval
 	to the stored somewhere value of counter, then
 	repeatedly compares it with it...  :)
@@ -19,6 +20,7 @@ wait:
 	highCounter	.req	r2
 	interval	.req	r3
 	push {lr}
+@	ldr interval, [r0]
 	mov interval, r0
 	bl getTimerAddr
 	ldr lowCounter, [r0, $4]
@@ -47,6 +49,7 @@ pushCounter:
         highCounter     .req    r2
         interval        .req    r3
         push {lr}
+@       ldr interval, [r0]
         mov interval, r0
         bl getTimerAddr
         ldr lowCounter, [r0, $4]
